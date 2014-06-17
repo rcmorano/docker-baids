@@ -34,7 +34,7 @@ It admits a container ID as argument also.
 # Extending/Contributing
 
 1. Fork project
-2. Add some bash functions (in e.g. your custom 'docker run' for xexposing port 80 for a determined project)
+2. Add some bash functions (in e.g. your custom 'docker run' for exposing port 80 for a determined project)
 3. Execute 'baids-remap' and get shortened aliases for your functions
 4. Commit your changes
 5. Optionally, if you consider that your functions are generic enough to help someone out there, send me a pull request! 
