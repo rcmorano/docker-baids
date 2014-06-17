@@ -6,7 +6,31 @@ You can use them in a standalone way (just copy/paste functions or aliases to yo
 
 # Installation
 
-Just clone or link this project under '~/.baids/functions.d'.
+Just clone or link this project under '~/.baids/functions.d' and reload aliases:
+
+```
+git clone https://github.com/rcmorano/docker-baids.git ~/.baids/functions.d/docker-baids
+baids-reload
+```
+
+```bash
+~# git clone https://github.com/rcmorano/docker-baids.git ~/.baids/functions.d/docker-baids
+Cloning into '/root/.baids/functions.d/docker-baids'...
+remote: Reusing existing pack: 69, done.
+remote: Total 69 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (69/69), done.
+Checking connectivity... done
+~# baids-reload
+~# docker<TAB>
+docker                                   docker-container-ip
+docker-autocommit                        docker-container-most-recent
+docker-baids-reload                      docker-container-remove-all
+docker-baids-remap                       docker-container-remove-all-non-running
+docker-baids-upgrade                     docker-image-most-recent
+docker-container-diff-most-recent        docker-image-remove-all
+docker-container-inspect-most-recent     docker-image-remove-orphan
+~# 
+```
 
 # Usage
 
