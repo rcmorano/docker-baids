@@ -12,51 +12,12 @@ Just clone or link this project under '~/.baids/functions.d' and reload aliases:
 git clone https://github.com/rcmorano/docker-baids.git ~/.baids/functions.d/docker-baids
 baids-reload
 ```
-
-```bash
-~# git clone https://github.com/rcmorano/docker-baids.git ~/.baids/functions.d/docker-baids
-Cloning into '/root/.baids/functions.d/docker-baids'...
-remote: Reusing existing pack: 69, done.
-remote: Total 69 (delta 0), reused 0 (delta 0)
-Unpacking objects: 100% (69/69), done.
-Checking connectivity... done
-~# baids-reload
-~# docker<TAB>
-docker                                   docker-container-ip
-docker-autocommit                        docker-container-most-recent
-docker-baids-reload                      docker-container-remove-all
-docker-baids-remap                       docker-container-remove-all-non-running
-docker-baids-upgrade                     docker-image-most-recent
-docker-container-diff-most-recent        docker-image-remove-all
-docker-container-inspect-most-recent     docker-image-remove-orphan
-~# 
-```
-
 # Usage
 
 You will usually type 'docker-' and push \<TAB\> to complete the command or remember some of the shortened aliases :]
 
 Here is the current functions list and some info. Although most are self explanatory, some need notes:
 
-* **docker-baids-reload**: reload aliases and functions
-* **docker-baids-remap**: recreates alias files from functions in 'functions.d' dir, then reloads them.
-It makes acronym-based aliases for each function in a separated file in 'aliases.d'. In e.g.:
-```
-# contents of $HOME/.docker-baids/aliases.d/00-docker-baids
-alias dbr='docker-baids-reload'
-alias dbre='docker-baids-remap'
-alias dbu='docker-baids-upgrade'
-alias dcmr='docker-container-most-recent'
-alias dcdmr='docker-container-diff-most-recent'
-alias dci='docker-container-ip'
-alias dcimr='docker-container-inspect-most-recent'
-alias dcra='docker-container-remove-all'
-alias dcranr='docker-container-remove-all-non-running'
-alias dimr='docker-image-most-recent'
-alias dira='docker-image-remove-all'
-alias diro='docker-image-remove-orphan'
-```
-* **docker-baids-upgrade**: pull rebases your docker-baids installation. Be careful :]
 * **docker-container-most-recent**: returns the most recently launched container's id
 * **docker-container-diff-most-recent**: 'docker diff' the most recently launched container
 * **docker-container-ip**: 'docker inspect' the most recently launched container and print its IP.
