@@ -2,43 +2,11 @@
 
 'docker-baids' stands for "docker bash aids" and it's just a bunch of general purpose bash aliases that turned into a bunch of general purpose bash functions+aliases for 'docker' project.
 
+You can use them in a standalone way (just copy/paste functions or aliases to your own files) or you can use it with [baids](https://github.com/rcmorano/baids), a project to manage bash functions and aliases.
+
 # Installation
 
-Just call the main script with the "install" argument:
-
-```
-root@6169068ffaa9:/# curl -sSL https://raw.githubusercontent.com/rcmorano/docker-baids/master/docker-baids | bash -s install
-Cloning into '/root/.docker-baids'...
-remote: Counting objects: 33, done.
-remote: Compressing objects: 100% (20/20), done.
-remote: Total 33 (delta 11), reused 28 (delta 6)
-Unpacking objects: 100% (33/33), done.
-
-[+] 'docker-baids' is now installed!
-[-] Now please, load 'docker-baids' executing:
-
-    source /root/.docker-baids/docker-baids
-root@6169068ffaa9:/#
-```
-
-It just clones the project at '~/.docker-baids/' and adds an include in your '.bashrc'.
-
-# Upgrade
-
-Just call 'docker-baids-upgrade' or its alias 'dbu':
-
-```
-root@6169068ffaa9:/# dbu 
-remote: Counting objects: 7, done.
-remote: Compressing objects: 100% (1/1), done.
-remote: Total 4 (delta 2), reused 4 (delta 2)
-Unpacking objects: 100% (4/4), done.
-From https://github.com/rcmorano/docker-baids
-   2093d14..b3d2ad4  master     -> origin/master
-   First, rewinding head to replay your work on top of it...
-   Fast-forwarded master to b3d2ad4623f1371ef1044932518ab98200017f32.
-root@6169068ffaa9:/#
-```
+Just clone or link this project under '~/.baids/functions.d'.
 
 # Usage
 
@@ -81,8 +49,8 @@ It admits a container ID as argument also.
 # Extending/Contributing
 
 1. Fork project
-2. Put some bash functions in 'functions.d' dir (in e.g. your custom 'docker run' for xexposing port 80 for a determined project)
-3. Execute 'docker-baids-remap' and get shortened aliases for your functions
+2. Add some bash functions (in e.g. your custom 'docker run' for xexposing port 80 for a determined project)
+3. Execute 'baids-remap' and get shortened aliases for your functions
 4. Commit your changes
 5. Optionally, if you consider that your functions are generic enough to help someone out there, send me a pull request! 
 
