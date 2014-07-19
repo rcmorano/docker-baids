@@ -18,7 +18,10 @@ You will usually type 'docker-' and push \<TAB\> to complete the command or reme
 
 Here is the current functions list and some info. Although most are self explanatory, some need notes:
 
+* **docker-container-grep**: greps running containers for a given pattern 
+* **docker-container-kill-pattern**: kills running containers matching a given pattern
 * **docker-container-most-recent**: returns the most recently launched container's id
+* **docker-container-most-recent-killed**: returns the latest exited container's id
 * **docker-container-diff-most-recent**: 'docker diff' the most recently launched container
 * **docker-container-ip**: 'docker inspect' the most recently launched container and print its IP.
 It admits a container ID as argument also.
@@ -26,10 +29,12 @@ It admits a container ID as argument also.
 * **docker-container-remove-all**: removes every existant container in localhost.
 **NOTE:** It tries to kill every running container, then, it tries to remove all of them.
 * **docker-container-remove-all-non-running**: removes only the non-running containers
+* **docker-image-grep**: greps images for a given pattern
 * **docker-image-most-recent**: returns the most recently build image's id
 * **docker-image-remove-all**: Are you sure? Tries to remove every image in docker host leaving a clean docker environment.
 **NOTE:** It calls 'docker-container-remove-all', then, tries to remove all the images.
 * **docker-image-remove-orphan**: It tries to remove every non tagged image.
+* **docker-image-remove-pattern**: removes images matching a given pattern
 
 # Extending/Contributing
 

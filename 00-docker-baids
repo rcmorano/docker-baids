@@ -1,8 +1,24 @@
 #!/bin/bash 
 
+function docker-container-grep() {
+    PATTERN=$@
+    docker ps | grep $PATTERN | grep -v ^CONTAINER
+}
+
+function docker-container-kill-pattern() {
+    PATTERN=$@
+    docker-container-grep $PATTERN | awk '{print $1}' | xargs -r docker kill
+}
+
 function docker-container-most-recent() {
 
     docker ps | grep -v ^CONTAINER | head -n1 | awk '{print $1}'
+
+}
+
+function docker-container-most-recent-killed() {
+
+    docker ps -a | grep Exited | head -n1 | awk '{print $1}'
 
 }
 
@@ -59,6 +75,11 @@ function docker-container-remove-all-non-running() {
 
 }
 
+function docker-image-grep () {
+    PATTERN=$@
+    docker images | grep $PATTERN | grep -v ^REPOSITORY
+}
+
 function docker-image-most-recent() {
     
     docker images | grep -v ^REPOSITORY | head -n1 | awk '{print $3}'
@@ -76,4 +97,9 @@ function docker-image-remove-orphan() {
 
     docker images | grep "<none>" | awk '{print $3}' | xargs -r docker rmi
 
+}
+
+function docker-image-remove-pattern() {
+    PATTERN=$@
+    docker-images-grep $PATTERN | awk '{print $1}' | xargs -r docker rmi
 }
