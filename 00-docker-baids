@@ -35,7 +35,7 @@ function docker-container-diff-most-recent() {
 
 }
 
-function docker-container-ip() {
+function docker-container-get-ip() {
 
     CONTAINER_ID=$1
     if [ -z "$CONTAINER_ID" ]
