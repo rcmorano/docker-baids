@@ -63,6 +63,30 @@ function docker-container-inspect-most-recent() {
 
 }
 
+function docker-container-get-root() {
+
+    CONTAINER_ID=$1
+    if [ -z "$CONTAINER_ID" ]
+    then
+        CONTAINER_ID=$(docker-container-most-recent)
+    fi
+    if [ ! -z "$CONTAINER_ID" ]
+    then
+        docker inspect --format '{{ .HostsPath }}' $CONTAINER_ID
+    else
+        echo "There are no running containers!"
+    fi
+
+}
+
+function docker-container-map-port() {
+    CONTAINER_ID=$1
+    SRC_PORT=$2
+    DST_PORT=$3
+    CONTAINER_IP=$(docker-container-get-ip $CONTAINER_ID)
+    iptables -t nat -A  DOCKER -p tcp --dport $SRC_PORT -j DNAT --to-destination $CONTAINER_IP:$DST_PORT
+}
+
 function docker-container-remove-all() {
 
     docker ps -a | grep -v ^CONTAINER | awk '{print $1}' | xargs -rI % sh -c "docker kill %; docker rm %"

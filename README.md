@@ -18,12 +18,16 @@ You will usually type 'docker-' and push \<TAB\> to complete the command or reme
 
 Here is the current functions list and some info. Although most are self explanatory, some need notes:
 
+* **docker-enter**: uses 'nsenter' to chroot into container's root
 * **docker-container-grep**: greps running containers for a given pattern 
 * **docker-container-kill-pattern**: kills running containers matching a given pattern
+* **docker-container-map-port**: maps host's port ($2) to container's ($1) port ($3)
 * **docker-container-most-recent**: returns the most recently launched container's id
 * **docker-container-most-recent-killed**: returns the latest exited container's id
 * **docker-container-diff-most-recent**: 'docker diff' the most recently launched container
-* **docker-container-ip**: 'docker inspect' the most recently launched container and print its IP.
+* **docker-container-get-ip**: 'docker inspect' the most recently launched container and print its IP.
+It admits a container ID as argument also.
+* **docker-container-get-root**: 'docker inspect' the most recently launched container and print its IP.
 It admits a container ID as argument also.
 * **docker-container-inspect-most-recent**: 'docker inspect' the most recently launched container
 * **docker-container-remove-all**: removes every existant container in localhost.
