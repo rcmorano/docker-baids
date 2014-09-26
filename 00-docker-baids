@@ -75,6 +75,27 @@ function docker-container-remove-all-non-running() {
 
 }
 
+function docker-enter() {
+
+    NSENTER=/usr/local/bin/nsenter
+    if [ ! -e $NSENTER ]
+    then
+        docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+    fi
+
+    if [ -z "$1" ]; then
+        echo "usage: docker-enter <container id/name> <command to run default:sh>"
+    else
+        CONTAINER_ID=$(docker inspect --format {{.State.Pid}} "$1")
+        if [ -z "$CONTAINER_ID" ]; then
+           exit 1
+        fi
+    shift
+    "$NSENTER" --target $CONTAINER_ID --mount --uts --ipc --net --pid -- "$@"
+fi
+
+}
+
 function docker-image-grep () {
     PATTERN=$@
     docker images | grep $PATTERN | grep -v ^REPOSITORY
