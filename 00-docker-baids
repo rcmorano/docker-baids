@@ -120,7 +120,7 @@ fi
 
 }
 
-function docker-image-grep () {
+function docker-image-grep() {
     PATTERN=$@
     docker images | grep $PATTERN | grep -v ^REPOSITORY
 }
@@ -146,5 +146,5 @@ function docker-image-remove-orphan() {
 
 function docker-image-remove-pattern() {
     PATTERN=$@
-    docker-images-grep $PATTERN | awk '{print $1}' | xargs -r docker rmi
+    docker-image-grep $PATTERN | awk '{print $1}' | xargs -r docker rmi
 }
