@@ -33,6 +33,7 @@ It admits a container ID as argument also.
 * **docker-container-remove-all**: removes every existant container in localhost.
 **NOTE:** It tries to kill every running container, then, it tries to remove all of them.
 * **docker-container-remove-all-non-running**: removes only the non-running containers
+* **docker-container-remove-pattern**: kills and removes containers matching a given pattern
 * **docker-image-grep**: greps images for a given pattern
 * **docker-image-most-recent**: returns the most recently build image's id
 * **docker-image-remove-all**: Are you sure? Tries to remove every image in docker host leaving a clean docker environment.

@@ -2,12 +2,17 @@
 
 function docker-container-grep() {
     PATTERN=$@
+    docker ps -a | grep $PATTERN | grep -v ^CONTAINER
+}
+
+function docker-container-grep-running() {
+    PATTERN=$@
     docker ps | grep $PATTERN | grep -v ^CONTAINER
 }
 
 function docker-container-kill-pattern() {
     PATTERN=$@
-    docker-container-grep $PATTERN | awk '{print $1}' | xargs -r docker kill
+    docker-container-grep-running $PATTERN | awk '{print $1}' | xargs -r docker kill
 }
 
 function docker-container-most-recent() {
@@ -96,6 +101,14 @@ function docker-container-remove-all() {
 function docker-container-remove-all-non-running() {
 
     docker ps -a | grep -v ^CONTAINER | grep Exit | awk '{print $1}' | xargs -rI % sh -c "docker kill %; docker rm %"
+
+}
+
+function docker-container-remove-pattern() {
+
+    PATTERN=$@
+    docker-container-kill-pattern $PATTERN
+    docker-container-grep $PATTERN | awk '{print $1}' | xargs -r docker rm
 
 }
 
