@@ -12,7 +12,7 @@ function docker-container-grep-running() {
 
 function docker-container-kill-pattern() {
     PATTERN=$@
-    docker-container-grep-running $PATTERN | awk '{print $1}' | xargs -r docker kill
+    docker-container-grep-running $PATTERN | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker kill %; echo "killed!");'
 }
 
 function docker-container-most-recent() {
@@ -94,13 +94,13 @@ function docker-container-map-port() {
 
 function docker-container-remove-all() {
 
-    docker ps -a | grep -v ^CONTAINER | awk '{print $1}' | xargs -rI % sh -c "docker kill %; docker rm %"
+    docker ps -a | grep -v ^CONTAINER | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker kill %; echo "killed!"); echo $(docker rm %; echo "removed!")'
 
 }
 
 function docker-container-remove-all-non-running() {
 
-    docker ps -a | grep -v ^CONTAINER | grep Exit | awk '{print $1}' | xargs -rI % sh -c "docker kill %; docker rm %"
+    docker ps -a | grep -v ^CONTAINER | grep Exit | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker kill %; echo "killed!"); echo $(docker rm %; echo "removed!")' 
 
 }
 
@@ -108,7 +108,7 @@ function docker-container-remove-pattern() {
 
     PATTERN=$@
     docker-container-kill-pattern $PATTERN
-    docker-container-grep $PATTERN | awk '{print $1}' | xargs -r docker rm
+    docker-container-grep $PATTERN | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker rm %; echo "removed!")'
 
 }
 
@@ -147,17 +147,17 @@ function docker-image-most-recent() {
 function docker-image-remove-all() {
 
     docker-container-remove-all
-    docker images -a | grep -v ^REPOSITORY | awk '{print $3}' | xargs -r docker rmi
+    docker images -a | grep -v ^REPOSITORY | awk '{print $3}' | xargs -rI % bash -c 'echo $(docker rmi %; echo "removed!");'
 
 }
 
 function docker-image-remove-orphan() {
 
-    docker images | grep "<none>" | awk '{print $3}' | xargs -r docker rmi
+    docker images | grep "<none>" | awk '{print $3}' | xargs -rI % bash -c 'echo $(docker rmi %; echo "removed!");'
 
 }
 
 function docker-image-remove-pattern() {
     PATTERN=$@
-    docker-image-grep $PATTERN | awk '{print $1}' | xargs -r docker rmi
+    docker-image-grep $PATTERN | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker rmi %; echo "removed!");'
 }
