@@ -100,7 +100,7 @@ function docker-container-remove-all() {
 
 function docker-container-remove-all-non-running() {
 
-    docker ps -a | grep -v ^CONTAINER | grep Exit | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker kill %; echo "killed!"); echo $(docker rm %; echo "removed!")' 
+    docker ps -a | grep -v ^CONTAINER | grep Exit | awk '{print $1}' | xargs -rI % bash -c 'echo $(docker rm %; echo "removed!")' 
 
 }
 
