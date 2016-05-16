@@ -161,3 +161,9 @@ function docker-image-remove-pattern() {
     PATTERN=$@
     docker-image-grep $PATTERN | awk '{print $1}' | xargs -rI % bash -c 'docker rmi %'
 }
+
+function docker-volumes-remove-orphan() {
+
+  docker volume rm $(docker volume ls -qf dangling=true)
+
+}
