@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 function docker-container-grep() {
     PATTERN=$@
@@ -139,7 +139,7 @@ function docker-image-grep() {
 }
 
 function docker-image-most-recent() {
-    
+
     docker images | grep -v ^REPOSITORY | head -n1 | awk '{print $3}'
 
 }
@@ -159,7 +159,7 @@ function docker-image-remove-orphan() {
 
 function docker-image-remove-pattern() {
     PATTERN=$@
-    docker-image-grep $PATTERN | awk '{print $1}' | xargs -rI % bash -c 'docker rmi %'
+    docker-image-grep $PATTERN | awk '{print $1":"$2}' | xargs -rI % bash -c 'docker rmi %'
 }
 
 function docker-volumes-remove-orphan() {
